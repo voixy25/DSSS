@@ -6,7 +6,7 @@
   <title>DSSS — Hitre spletne strani in AI rešitve | Domen Skomina</title>
   <meta name="description" content="DSSS (Domen Skomina Spletne Storitve) — hitre spletne strani, AI integracije, optimizacija konverzij in interaktivna grafika. Inženirski pristop z UL FRI brez odvečne navlake.">
   <meta name="author" content="Domen Skomina">
-  <meta name="theme-color" content="#071712">
+  <meta name="theme-color" content="#09130f">
   <link rel="canonical" href="https://portfolio.skomina.si/">
 
   <link rel="icon" href="favicon.svg?v=20261120" type="image/svg+xml">
@@ -29,7 +29,8 @@
   <meta name="twitter:description" content="Hitre spletne strani, AI integracije in optimizacija konverzij brez odvečne navlake.">
   <meta name="twitter:image" content="https://portfolio.skomina.si/media/og-image.png">
 
-  <link rel="stylesheet" href="css/style.css?v=20261120">
+  <link rel="preload" href="media/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=20261120-unslop">
 
   <script type="application/ld+json">
   {
@@ -168,18 +169,18 @@
       <div class="header-controls">
         <button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="true" aria-label="Vklopi ali izklopi 3D ozadje">
           <span class="motion-indicator" aria-hidden="true"></span>
-          <span class="motion-label">3D: VKL.</span>
+          <span class="motion-label">3D vklopljen</span>
         </button>
 
         <a class="btn btn-primary btn-nav" href="#kontakt" data-track-cta="header_cta">Povprašajte po ponudbi</a>
 
         <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Odpri navigacijski meni">
-          <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
             <line x1="4" y1="7" x2="20" y2="7"/>
             <line x1="4" y1="12" x2="20" y2="12"/>
             <line x1="4" y1="17" x2="20" y2="17"/>
           </svg>
-          <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
             <line x1="6" y1="6" x2="18" y2="18"/>
             <line x1="18" y1="6" x2="6" y2="18"/>
           </svg>
@@ -203,41 +204,37 @@
 
   <main id="main-content">
     <section id="top" class="hero section">
-      <div class="container">
-        <div class="hero-panel">
-          <p class="eyebrow-pill">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="hero-status">
             <span class="live-dot" aria-hidden="true"></span>
-            ODPRT ZA PROJEKTE · SLOVENIJA &amp; DELO NA DALJAVO
+            Prost za nove projekte · Slovenija in delo na daljavo
           </p>
 
-          <h1 class="hero-title">Hitre spletne strani in AI rešitve, ki prinašajo stranke.</h1>
+          <h1 class="hero-title">Hitre spletne strani in AI na vaših podatkih</h1>
 
           <p class="hero-lead">
-            Inženirski pristop z UL FRI — brez odvečne navlake, s takojšnjim odzivom, tehnično dovršenostjo in jasno potjo od prvega obiska do povpraševanja.
+            Sem Domen Skomina, študent računalništva na UL FRI. Gradim statične strani, selitve s počasnega WordPressa in AI pomočnike za podjetja, brez agencije vmes.
           </p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#kontakt" data-track-cta="hero_primary">Povejte mi o svojem projektu</a>
             <a class="btn btn-secondary" href="#projekti" data-track-cta="hero_projects">Ogled projektov</a>
           </div>
+        </div>
 
-          <div class="proof-bar" aria-label="Ključni poudarki sodelovanja">
-            <div class="proof-cell">
-              <span class="proof-value">03</span>
-              <span class="proof-label">Javni produkcijski projekti</span>
-            </div>
-            <div class="proof-cell">
-              <span class="proof-value">1–2 dni</span>
-              <span class="proof-label">Odzivni čas na povpraševanje</span>
-            </div>
-            <div class="proof-cell">
-              <span class="proof-value">UL FRI</span>
-              <span class="proof-label">Inženirski pristop brez navlake</span>
-            </div>
-            <div class="proof-cell">
-              <span class="proof-value">100 %</span>
-              <span class="proof-label">Prilagojeno mobilnim napravam</span>
-            </div>
+        <div class="hero-facts" role="list" aria-label="Ključni poudarki sodelovanja">
+          <div class="proof-cell" role="listitem">
+            <span class="proof-value">3</span>
+            <span class="proof-label">objavljeni projekti v produkciji</span>
+          </div>
+          <div class="proof-cell" role="listitem">
+            <span class="proof-value">1–2 dni</span>
+            <span class="proof-label">do odgovora na povpraševanje</span>
+          </div>
+          <div class="proof-cell" role="listitem">
+            <span class="proof-value">0 €</span>
+            <span class="proof-label">za uvodni pogovor</span>
           </div>
         </div>
       </div>
@@ -247,13 +244,13 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <p class="section-eyebrow">IZBRANA DELA</p>
+            <p class="section-eyebrow">Izbrana dela</p>
             <div class="section-title-row">
               <h2 class="section-title">Projekti in študije primerov</h2>
-              <span id="project-count" class="count-badge" aria-live="polite" aria-label="Število prikazanih projektov: 03">03</span>
+              <span id="project-count" class="count-badge" aria-live="polite" aria-label="Število prikazanih projektov: 3">3</span>
             </div>
             <p class="section-desc">
-              Izdelane spletne rešitve, pri katerih štejejo hitrost nalaganja, jasna struktura in zanesljiva uporabniška izkušnja.
+              Tri objavljene strani, vsaka s svojim izzivom: trije jeziki, selitev kataloga z WordPressa in 3D optika v brskalniku.
             </p>
           </div>
 
@@ -269,7 +266,7 @@
           <article class="project-card" data-project-id="vina-skomina" data-tags="Splet|Optimizacija|Interaktivna grafika">
             <div class="project-thumb">
               <div class="thumb-fallback" aria-hidden="true">
-                <span>VINA.SKOMINA.SI</span>
+                <span>vina.skomina.si</span>
                 <small>Vinarstvo &amp; degustacije</small>
               </div>
               <picture>
@@ -279,7 +276,7 @@
             </div>
             <div class="project-body">
               <div class="project-top">
-                <span class="project-kicker">VINARSTVO</span>
+                <span class="project-kicker">Vinarstvo</span>
                 <span class="project-domain">vina.skomina.si</span>
               </div>
               <h3 class="project-title">Vina Skomina</h3>
@@ -306,7 +303,7 @@
                 </div>
               </dl>
               <div class="project-actions">
-                <a class="btn btn-primary btn-sm" href="https://vina.skomina.si" target="_blank" rel="noopener noreferrer" data-track-project="vina-skomina">
+                <a class="btn btn-secondary btn-sm" href="https://vina.skomina.si" target="_blank" rel="noopener noreferrer" data-track-project="vina-skomina">
                   Ogled projekta <span aria-hidden="true">↗</span>
                 </a>
                 <button type="button" class="btn btn-ghost btn-sm" data-project-modal="vina-skomina">Več o projektu</button>
@@ -317,7 +314,7 @@
           <article class="project-card" data-project-id="dimet" data-tags="Splet|Optimizacija">
             <div class="project-thumb" data-hover-video="media/dimet.mp4">
               <div class="thumb-fallback" aria-hidden="true">
-                <span>DIMET.SKOMINA.SI</span>
+                <span>dimet.skomina.si</span>
                 <small>Storitve &amp; katalog</small>
               </div>
               <picture>
@@ -327,7 +324,7 @@
             </div>
             <div class="project-body">
               <div class="project-top">
-                <span class="project-kicker">STORITVE &amp; KATALOG</span>
+                <span class="project-kicker">Storitve &amp; katalog</span>
                 <span class="project-domain">dimet.skomina.si</span>
               </div>
               <h3 class="project-title">Dimet d.o.o.</h3>
@@ -353,7 +350,7 @@
                 </div>
               </dl>
               <div class="project-actions">
-                <a class="btn btn-primary btn-sm" href="https://dimet.skomina.si" target="_blank" rel="noopener noreferrer" data-track-project="dimet">
+                <a class="btn btn-secondary btn-sm" href="https://dimet.skomina.si" target="_blank" rel="noopener noreferrer" data-track-project="dimet">
                   Ogled projekta <span aria-hidden="true">↗</span>
                 </a>
                 <button type="button" class="btn btn-ghost btn-sm" data-project-modal="dimet">Več o projektu</button>
@@ -364,7 +361,7 @@
           <article class="project-card" data-project-id="skomina-hub" data-tags="Splet|Optimizacija|Interaktivna grafika">
             <div class="project-thumb">
               <div class="thumb-fallback" aria-hidden="true">
-                <span>SKOMINA.SI</span>
+                <span>skomina.si</span>
                 <small>Osebni hub &amp; WebGL</small>
               </div>
               <picture>
@@ -374,7 +371,7 @@
             </div>
             <div class="project-body">
               <div class="project-top">
-                <span class="project-kicker">OSEBNI HUB &amp; WEBGL</span>
+                <span class="project-kicker">Osebni hub &amp; WebGL</span>
                 <span class="project-domain">skomina.si</span>
               </div>
               <h3 class="project-title">Skomina Hub</h3>
@@ -400,7 +397,7 @@
                 </div>
               </dl>
               <div class="project-actions">
-                <a class="btn btn-primary btn-sm" href="https://skomina.si" target="_blank" rel="noopener noreferrer" data-track-project="skomina-hub">
+                <a class="btn btn-secondary btn-sm" href="https://skomina.si" target="_blank" rel="noopener noreferrer" data-track-project="skomina-hub">
                   Ogled projekta <span aria-hidden="true">↗</span>
                 </a>
                 <button type="button" class="btn btn-ghost btn-sm" data-project-modal="skomina-hub">Več o projektu</button>
@@ -418,19 +415,19 @@
     <section id="storitve" class="section">
       <div class="container">
         <div class="section-head-stack">
-          <p class="section-eyebrow">STORITVE</p>
-          <h2 class="section-title">Tehnične rešitve, usmerjene v rezultat</h2>
+          <p class="section-eyebrow">Storitve</p>
+          <h2 class="section-title">Od statične strani do AI pomočnika</h2>
           <p class="section-desc">
-            Od čistih statičnih strani do premišljenih AI integracij — brez težkih predlog in nepotrebnega mesečnega vzdrževanja.
+            Štiri vrste dela, vse brez težkih predlog in mesečnega vzdrževanja vtičnikov.
           </p>
         </div>
 
         <div class="services-grid">
           <article class="service-card">
-            <span class="service-index">01 / HITRE SPLETNE STRANI</span>
+            <span class="service-index">01</span>
             <h3 class="service-title">Hitre spletne strani</h3>
             <p class="service-desc">
-              Izdelava lahkih statičnih strani, pristajalnih strani (landing pages) in migracije iz počasnega WordPressa z optimizacijo slik, lazy loadingom, CDN-jem in odličnimi Core Web Vitals.
+              Lahke statične in pristajalne strani ter selitve s počasnega WordPressa, z optimiziranimi slikami, odloženim nalaganjem in CDN-jem.
             </p>
             <ul class="tech-list" aria-label="Primeri izvedbe">
               <li>Statične strani</li>
@@ -445,7 +442,7 @@
           </article>
 
           <article class="service-card">
-            <span class="service-index">02 / AI INTEGRACIJE</span>
+            <span class="service-index">02</span>
             <h3 class="service-title">AI integracije</h3>
             <p class="service-desc">
               Praktična uporaba umetne inteligence na vaših podatkih: pogovorni pomočniki (chatboti), avtomatizacija odgovorov, personalizacija vsebine, povzetki in pametno iskanje po dokumentaciji ali katalogih.
@@ -462,16 +459,16 @@
           </article>
 
           <article class="service-card">
-            <span class="service-index">03 / OPTIMIZACIJA KONVERZIJ</span>
+            <span class="service-index">03</span>
             <h3 class="service-title">Optimizacija konverzij</h3>
             <p class="service-desc">
-              Pretvorba obiskovalcev v povpraševanja prek A/B testiranja, analitike in merjenja dogodkov, jasnih kontaktnih obrazcev, močnih CTA-jev ter odprave ozkih grl pri hitrosti nalaganja.
+              Več povpraševanj z istim obiskom: A/B testi, merjenje dogodkov, krajši kontaktni obrazci in odprava ozkih grl pri nalaganju.
             </p>
             <ul class="tech-list" aria-label="Primeri izvedbe">
               <li>A/B testiranje</li>
               <li>Analitika &amp; dogodki</li>
               <li>Jasni obrazci</li>
-              <li>Močni CTA-ji</li>
+              <li>Jasni pozivi k dejanju</li>
               <li>Optimizacija hitrosti</li>
             </ul>
             <a class="service-cta" href="#kontakt" data-prefill-service="Optimizacija hitrosti in konverzij" data-track-cta="service_cro">
@@ -480,10 +477,10 @@
           </article>
 
           <article class="service-card">
-            <span class="service-index">04 / INTERAKTIVNA GRAFIKA</span>
+            <span class="service-index">04</span>
             <h3 class="service-title">Interaktivna grafika</h3>
             <p class="service-desc">
-              Three.js in WebGL učinki, subtilne animacije, 3D predstavitve in interaktivne vizualizacije — vedno z upoštevanjem zmogljivosti naprav ter nastavitve <code>prefers-reduced-motion</code>.
+              Three.js in WebGL učinki, 3D predstavitve in interaktivne vizualizacije, kot je oblak delcev na vrhu te strani. Vedno z mislijo na šibkejše naprave in nastavitev <code>prefers-reduced-motion</code>.
             </p>
             <ul class="tech-list" aria-label="Primeri izvedbe">
               <li>Three.js / WebGL</li>
@@ -502,8 +499,8 @@
     <section id="cene" class="section">
       <div class="container">
         <div class="section-head-stack">
-          <p class="section-eyebrow">PROCES &amp; PREGLEDNOST CEN</p>
-          <h2 class="section-title">Jasna pričakovanja in pregleden potek dela</h2>
+          <p class="section-eyebrow">Proces in cene</p>
+          <h2 class="section-title">Okvirne cene in potek dela</h2>
           <p class="section-desc">
             Okvirne cene za lažje načrtovanje — končna ponudba je vedno po dogovoru glede na obseg, vsebino in tehnično zahtevnost projekta.
           </p>
@@ -512,7 +509,7 @@
         <div class="pricing-grid">
           <article class="pricing-card">
             <div class="pricing-head">
-              <h3 class="pricing-title">Landing / predstavitvena stran</h3>
+              <h3 class="pricing-title">Pristajalna ali predstavitvena stran</h3>
             </div>
             <p class="pricing-price">od 500 €</p>
             <p class="pricing-summary">
@@ -530,8 +527,7 @@
 
           <article class="pricing-card pricing-card-featured">
             <div class="pricing-head">
-              <h3 class="pricing-title">Poslovna stran / Katalog / Migracija</h3>
-              <span class="pricing-badge">Najpogosteje</span>
+              <h3 class="pricing-title">Poslovna stran, katalog ali selitev</h3>
             </div>
             <p class="pricing-price">od 1.200 €</p>
             <p class="pricing-summary">
@@ -542,7 +538,7 @@
               <li>Prenos obstoječe vsebine brez izpada delovanja</li>
               <li>Strukturirani podatki (JSON-LD), sitemap in merjenje dogodkov</li>
             </ul>
-            <a class="btn btn-primary btn-sm" href="#kontakt" data-prefill-service="Spletna stran" data-track-cta="pricing_business">
+            <a class="btn btn-secondary btn-sm" href="#kontakt" data-prefill-service="Spletna stran" data-track-cta="pricing_business">
               Zahtevaj ponudbo
             </a>
           </article>
@@ -591,10 +587,10 @@
           </ol>
 
           <div class="expectations-bar">
-            <span>Odzivni čas: 1–2 delovna dneva</span>
-            <span>·</span>
-            <span>Slovenija &amp; mednarodno delo na daljavo</span>
-            <span>·</span>
+            <span>Odgovor v 1–2 delovnih dneh</span>
+            <span aria-hidden="true">·</span>
+            <span>Slovenija in delo na daljavo</span>
+            <span aria-hidden="true">·</span>
             <span>Brez skritih stroškov</span>
           </div>
         </div>
@@ -605,8 +601,8 @@
       <div class="container">
         <div class="about-layout">
           <div class="about-card">
-            <p class="section-eyebrow">O MENI &amp; ZAUPANJE</p>
-            <h2 class="section-title">Domen Skomina — neposredno z razvijalcem, brez posrednikov</h2>
+            <p class="section-eyebrow">O meni</p>
+            <h2 class="section-title">Delate neposredno z razvijalcem, ki piše kodo</h2>
             <p>
               Sem študent računalništva in informatike na <strong>UL FRI</strong> (Ljubljana / Nova Gorica). Pri vsakem projektu združujem inženirsko natančnost in razumevanje poslovnih ciljev — cilj ni le lepa grafika, temveč hitra in zanesljiva stran, ki obiskovalcem olajša prvi korak do stika z vami.
             </p>
@@ -628,7 +624,7 @@
           <div class="about-side">
             <div class="pillars-list">
               <article class="pillar-card">
-                <h3>Hitrost brez navlake</h3>
+                <h3>Hitrost brez odvečnih vtičnikov</h3>
                 <p>Čista koda in optimizirana sredstva namesto počasnih vtičnikov, ki obremenjujejo mobilne uporabnike.</p>
               </article>
               <article class="pillar-card">
@@ -663,7 +659,7 @@
       <div class="container">
         <div class="contact-grid">
           <div class="contact-info">
-            <p class="section-eyebrow">KONTAKT</p>
+            <p class="section-eyebrow">Kontakt</p>
             <h2 class="section-title">Povejte mi o svojem projektu</h2>
             <p class="section-desc">
               Napišite nekaj stavkov o svoji ideji, obstoječi strani ali izzivu. Odgovorim s konkretnim predlogom in okvirno oceno naslednjih korakov.
@@ -822,7 +818,7 @@
   <dialog id="privacy-modal" class="modal modal-sm" aria-labelledby="privacy-modal-title">
     <div class="modal-head">
       <div>
-        <p class="modal-kicker">PRAVNO OBVESTILO</p>
+        <p class="modal-kicker">Pravno obvestilo</p>
         <h2 id="privacy-modal-title" class="modal-title">Politika zasebnosti</h2>
       </div>
       <button type="button" class="modal-close" data-close-modal aria-label="Zapri politiko zasebnosti">&times;</button>
@@ -862,7 +858,7 @@
   <script src="js/analytics.js?v=20261120" defer></script>
   <script src="js/fluid.js?v=20261120" defer></script>
   <script src="js/particles.js?v=20261120" defer></script>
-  <script src="js/main.js?v=20261120" defer></script>
-  <script src="js/ui.js?v=20261120-2" defer></script>
+  <script src="js/main.js?v=20261120-unslop" defer></script>
+  <script src="js/ui.js?v=20261120-unslop" defer></script>
 </body>
 </html>

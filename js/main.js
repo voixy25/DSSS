@@ -8,7 +8,7 @@
   'use strict';
 
   const CONFIG = Object.freeze({
-    clearColor: 0x071712,
+    clearColor: 0x09130f,
     maxPixelRatio: 1.5,
     mobileQuery: '(pointer: coarse), (max-width: 760px)',
     reducedMotionQuery: '(prefers-reduced-motion: reduce)',
@@ -23,7 +23,7 @@
     portraitRefAspect: 1.05,
     portraitLookY: -0.22,
     portraitLookRamp: 0.35,
-    wideLookX: -0.45,
+    wideLookX: -0.75,
     wideLookStartAspect: 1.05,
     wideLookRamp: 0.55,
   });
@@ -214,6 +214,8 @@
   const reducedQuery = window.matchMedia(CONFIG.reducedMotionQuery);
   let motionEnabled = readInitialMotion(reducedQuery);
   let activeState = null;
+  // Sections below the hero are opaque, so the field only needs to render while the hero is on screen.
+  let heroVisible = true;
 
   function stopLoop() {
     if (!activeState || !activeState.rafId) return;
@@ -222,7 +224,7 @@
   }
 
   function renderFrame() {
-    if (!activeState || !motionEnabled || document.hidden || activeState.contextLost) {
+    if (!activeState || !motionEnabled || !heroVisible || document.hidden || activeState.contextLost) {
       if (activeState) activeState.rafId = 0;
       return;
     }
@@ -242,7 +244,7 @@
   }
 
   function startLoop() {
-    if (!activeState || activeState.rafId || !motionEnabled || document.hidden || activeState.contextLost) {
+    if (!activeState || activeState.rafId || !motionEnabled || !heroVisible || document.hidden || activeState.contextLost) {
       return;
     }
     // Discard elapsed delta from any paused/hidden interval before stepping.
@@ -332,6 +334,18 @@
         startLoop();
       }
     });
+
+    const hero = document.getElementById('top');
+    if (hero && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        heroVisible = entries[entries.length - 1].isIntersecting;
+        if (heroVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      }).observe(hero);
+    }
 
     canvas.addEventListener('webglcontextlost', (e) => {
       e.preventDefault();
