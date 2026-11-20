@@ -8,7 +8,7 @@
   'use strict';
 
   var CONTACT_EMAIL = 'info@skomina.si';
-  var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
+  var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/42d51ea038188ae0320032b465d14834';
   var MIN_SUBMIT_MS = 2000;
   var formLoadedAt = Date.now();
 
