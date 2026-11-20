@@ -13,22 +13,23 @@
   const CONFIG = Object.freeze({
     SIM_RES: 256,
     DYE_RES: 512,
-    VELOCITY_DISSIPATION: 0.98,
-    DENSITY_DISSIPATION: 0.97,
+    VELOCITY_DISSIPATION: 0.955,
+    DENSITY_DISSIPATION: 0.94,
     PRESSURE_DISSIPATION: 0.95,
     PRESSURE_ITERATIONS: 5,
     CURL: 30,
     SIM_DT: 1 / 60,
     MAX_STEPS_PER_FRAME: 3,
-    VORTICITY_CLAMP: 1000,
+    VORTICITY_CLAMP: 32,
     IDLE_RESET_MS: 50,
     MIN_MOVE_PX: 0.01,
+    MAX_JUMP_PX: 260,
     RADIUS_LEN_MAX: 5,
-    RADIUS_PX_MAX: 60,
-    RADIUS_SCALE_DESKTOP: 0.6,
-    RADIUS_SCALE_MOBILE: 0.8,
-    FORCE_LEN_MAX: 15,
-    FORCE_MAX: 10,
+    RADIUS_PX_MAX: 26,
+    RADIUS_SCALE_DESKTOP: 0.55,
+    RADIUS_SCALE_MOBILE: 0.7,
+    SPEED_LEN_MAX: 55,
+    FORCE_MAX: 14,
     RADIUS_UV_DIVISOR: 200,
     MASK_MAX_DPR: 1,
     MASK_MAX_SIZE: 2048
@@ -41,6 +42,24 @@
     'void main() {',
     '  vUv = uv;',
     '  gl_Position = vec4(position.xy, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  const SANITIZE_GLSL = [
+    'bool isFiniteFloat(float x) {',
+    '  return (x >= -65504.0 && x <= 65504.0);',
+    '}',
+    'vec2 sanitizeVel(vec2 v) {',
+    '  vec2 safe = vec2(isFiniteFloat(v.x) ? v.x : 0.0, isFiniteFloat(v.y) ? v.y : 0.0);',
+    '  return clamp(safe, vec2(-32.0), vec2(32.0));',
+    '}',
+    'vec3 sanitizeVec3(vec3 v) {',
+    '  vec3 safe = vec3(',
+    '    isFiniteFloat(v.x) ? v.x : 0.0,',
+    '    isFiniteFloat(v.y) ? v.y : 0.0,',
+    '    isFiniteFloat(v.z) ? v.z : 0.0',
+    '  );',
+    '  return clamp(safe, vec3(-32.0), vec3(32.0));',
     '}'
   ].join('\n');
 
@@ -59,6 +78,7 @@
     'uniform vec3 uColor;',
     'uniform float uRadius;',
     'uniform float uAspect;',
+    SANITIZE_GLSL,
     'void main() {',
     '  vec2 p = vUv - uA;',
     '  vec2 ba = uB - uA;',
@@ -66,8 +86,11 @@
     '  ba.x *= uAspect;',
     '  float h = clamp(dot(p, ba) / max(dot(ba, ba), 1e-8), 0.0, 1.0);',
     '  vec2 d = p - ba * h;',
-    '  vec3 splat = exp(-dot(d, d) / (uRadius * uRadius)) * uColor;',
-    '  gl_FragColor = vec4(texture2D(uTarget, vUv).xyz + splat, 1.0);',
+    '  float r2 = max(uRadius * uRadius, 1e-8);',
+    '  vec3 splat = exp(-dot(d, d) / r2) * uColor;',
+    '  vec3 base = sanitizeVec3(texture2D(uTarget, vUv).xyz);',
+    '  vec3 next = sanitizeVec3(base + splat);',
+    '  gl_FragColor = vec4(next, 1.0);',
     '}'
   ].join('\n');
 
@@ -93,6 +116,7 @@
     'uniform float uCurlStrength;',
     'uniform float uDt;',
     'uniform float uClamp;',
+    SANITIZE_GLSL,
     'void main() {',
     NEIGHBOURS,
     '  float L = texture2D(uCurl, vL).x;',
@@ -104,8 +128,10 @@
     '  force /= length(force) + 0.0001;',
     '  force *= uCurlStrength * C;',
     '  force.y *= -1.0;',
-    '  vec2 vel = texture2D(uVelocity, vUv).xy + force * uDt;',
-    '  gl_FragColor = vec4(clamp(vel, -uClamp, uClamp), 0.0, 1.0);',
+    '  vec2 cur = sanitizeVel(texture2D(uVelocity, vUv).xy);',
+    '  vec2 vel = sanitizeVel(cur + force * uDt);',
+    '  vel = clamp(vel, vec2(-uClamp), vec2(uClamp));',
+    '  gl_FragColor = vec4(vel, 0.0, 1.0);',
     '}'
   ].join('\n');
 
@@ -158,13 +184,14 @@
     'uniform sampler2D uPressure;',
     'uniform sampler2D uVelocity;',
     'uniform vec2 uTexelSize;',
+    SANITIZE_GLSL,
     'void main() {',
     NEIGHBOURS,
     '  float L = texture2D(uPressure, vL).x;',
     '  float R = texture2D(uPressure, vR).x;',
     '  float T = texture2D(uPressure, vT).x;',
     '  float B = texture2D(uPressure, vB).x;',
-    '  vec2 vel = texture2D(uVelocity, vUv).xy - vec2(R - L, T - B);',
+    '  vec2 vel = sanitizeVel(texture2D(uVelocity, vUv).xy - vec2(R - L, T - B));',
     '  gl_FragColor = vec4(vel, 0.0, 1.0);',
     '}'
   ].join('\n');
@@ -176,17 +203,21 @@
     'uniform vec2 uTexelSize;',
     'uniform float uDt;',
     'uniform float uDissipation;',
+    SANITIZE_GLSL,
     'void main() {',
-    '  vec2 coord = vUv - uDt * texture2D(uVelocity, vUv).xy * uTexelSize;',
-    '  gl_FragColor = uDissipation * texture2D(uSource, coord);',
+    '  vec2 vel = sanitizeVel(texture2D(uVelocity, vUv).xy);',
+    '  vec2 coord = clamp(vUv - uDt * vel * uTexelSize, 0.0, 1.0);',
+    '  vec3 src = sanitizeVec3(texture2D(uSource, coord).xyz);',
+    '  gl_FragColor = vec4(sanitizeVec3(uDissipation * src), 1.0);',
     '}'
   ].join('\n');
 
   const FRAG_DISPLAY = [
     'varying vec2 vUv;',
     'uniform sampler2D uDye;',
+    SANITIZE_GLSL,
     'void main() {',
-    '  vec3 c = texture2D(uDye, vUv).rgb;',
+    '  vec3 c = sanitizeVec3(texture2D(uDye, vUv).rgb);',
     '  float a = clamp(max(c.r, max(c.g, c.b)), 0.0, 1.0);',
     '  gl_FragColor = vec4(a, a, a, a);',
     '}'
@@ -321,9 +352,34 @@
     let viewWidth = window.innerWidth || 1;
     let viewHeight = window.innerHeight || 1;
     let lastMoveTime = 0;
-    let maskDirty = false;
     let disposed = false;
+    let resetStroke = false;
     let accumulator = 0;
+
+    function withSavedState(fn) {
+      const prevTarget = renderer.getRenderTarget();
+      const prevAutoClear = renderer.autoClear;
+      const prevAlpha = renderer.getClearAlpha();
+      renderer.getClearColor(savedColor);
+      renderer.autoClear = false;
+      try {
+        fn();
+      } finally {
+        renderer.autoClear = prevAutoClear;
+        renderer.setClearColor(savedColor, prevAlpha);
+        renderer.setRenderTarget(prevTarget);
+      }
+    }
+
+    function clearInitialTargets() {
+      withSavedState(() => {
+        renderer.setClearColor(0x000000, 0);
+        [velocity.read, velocity.write, dye.read, dye.write, pressure.read, pressure.write, mask].forEach((target) => {
+          renderer.setRenderTarget(target);
+          renderer.clear(true, false, false);
+        });
+      });
+    }
 
     function blit(material, target) {
       mesh.material = material;
@@ -347,20 +403,27 @@
       if (!pointer.has) return;
       const cx = pointer.x;
       const cy = pointer.y;
-      const len = Math.hypot(cx - pointer.prevX, cy - pointer.prevY);
-      if (len > CONFIG.MIN_MOVE_PX) {
-        const sx = pointer.prevX;
-        const sy = pointer.prevY;
-        const scale = isMobile ? CONFIG.RADIUS_SCALE_MOBILE : CONFIG.RADIUS_SCALE_DESKTOP;
-        const radiusPx = clampMap(len, 0, CONFIG.RADIUS_LEN_MAX, 0, CONFIG.RADIUS_PX_MAX) * scale;
-        const force = clampMap(len, 0, CONFIG.FORCE_LEN_MAX, 0, CONFIG.FORCE_MAX);
-        const radius = radiusPx / CONFIG.RADIUS_UV_DIVISOR;
-        const dx = cx - sx;
-        const dy = cy - sy;
-        if (radius > 0) {
-          splat(velocity, sx, sy, cx, cy, [dx * force, -dy * force, 1], radius);
-          splat(dye, sx, sy, cx, cy, [1, 1, 1], radius);
-        }
+      const dx = cx - pointer.prevX;
+      const dy = cy - pointer.prevY;
+      const len = Math.hypot(dx, dy);
+      if (len <= CONFIG.MIN_MOVE_PX) return;
+      if (len > CONFIG.MAX_JUMP_PX) {
+        pointer.prevX = cx;
+        pointer.prevY = cy;
+        return;
+      }
+      const sx = pointer.prevX;
+      const sy = pointer.prevY;
+      const nx = dx / len;
+      const ny = dy / len;
+      const speed = clampMap(len, 0, CONFIG.SPEED_LEN_MAX, 0, 1.0);
+      const strength = speed * CONFIG.FORCE_MAX;
+      const scale = isMobile ? CONFIG.RADIUS_SCALE_MOBILE : CONFIG.RADIUS_SCALE_DESKTOP;
+      const radiusPx = clampMap(len, 0, CONFIG.RADIUS_LEN_MAX, 0, CONFIG.RADIUS_PX_MAX) * scale;
+      const radius = radiusPx / CONFIG.RADIUS_UV_DIVISOR;
+      if (radius > 0) {
+        splat(velocity, sx, sy, cx, cy, [nx * strength, -ny * strength, 0], radius);
+        splat(dye, sx, sy, cx, cy, [1, 1, 1], radius);
       }
       pointer.prevX = cx;
       pointer.prevY = cy;
@@ -432,17 +495,20 @@
         steps++;
       }
       if (steps === CONFIG.MAX_STEPS_PER_FRAME) accumulator = 0;
-      if (steps > 0 || maskDirty) {
+      if (steps > 0) {
         renderMask();
-        maskDirty = false;
       }
     }
 
+    clearInitialTargets();
+
     return {
       pointerMove(clientX, clientY) {
+        if (!Number.isFinite(clientX) || !Number.isFinite(clientY)) return;
         const now = performance.now();
-        if (!pointer.has || now - lastMoveTime > CONFIG.IDLE_RESET_MS) {
+        if (!pointer.has || resetStroke || now - lastMoveTime > CONFIG.IDLE_RESET_MS) {
           pointer.has = true;
+          resetStroke = false;
           pointer.prevX = clientX;
           pointer.prevY = clientY;
         }
@@ -451,23 +517,17 @@
         pointer.y = clientY;
       },
 
+      pointerReset() {
+        resetStroke = true;
+      },
+
       update(dt) {
         if (disposed || !pointer.has) return;
-        const prevTarget = renderer.getRenderTarget();
-        const prevAutoClear = renderer.autoClear;
-        const prevAlpha = renderer.getClearAlpha();
-        renderer.getClearColor(savedColor);
-        renderer.autoClear = false;
-        try {
-          runSteps(dt);
-        } finally {
-          renderer.autoClear = prevAutoClear;
-          renderer.setClearColor(savedColor, prevAlpha);
-          renderer.setRenderTarget(prevTarget);
-        }
+        withSavedState(() => runSteps(dt));
       },
 
       resize(width, height) {
+        if (disposed) return;
         viewWidth = Math.max(1, width);
         viewHeight = Math.max(1, height);
         const dpr = Math.min(renderer.getPixelRatio(), CONFIG.MASK_MAX_DPR);
@@ -481,9 +541,9 @@
         const targetW = Math.max(1, Math.round(w));
         const targetH = Math.max(1, Math.round(h));
         if (mask.width === targetW && mask.height === targetH) return;
-        // setSize disposes and reallocates the texture (empty), so re-render the mask next update.
+        // setSize disposes and reallocates the texture (empty), so immediately re-render the mask.
         mask.setSize(targetW, targetH);
-        maskDirty = true;
+        withSavedState(renderMask);
       },
 
       get velocityTexture() { return velocity.read.texture; },

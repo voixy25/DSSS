@@ -1,0 +1,18 @@
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; base-uri 'none'; form-action 'self' https://formsubmit.co; frame-ancestors 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/data/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/media/*
+  Cache-Control: public, max-age=604800
