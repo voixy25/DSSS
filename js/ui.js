@@ -93,10 +93,6 @@
     }
   }
 
-  function pad2(n) {
-    return n < 10 ? '0' + n : String(n);
-  }
-
   function slugify(value) {
     return String(value || '')
       .toLowerCase()
@@ -189,7 +185,7 @@
       motionEnabled = Boolean(enabled);
       btn.setAttribute('aria-pressed', motionEnabled ? 'true' : 'false');
       if (labelEl) {
-        labelEl.textContent = motionEnabled ? '3D: VKL.' : '3D: IZKL.';
+        labelEl.textContent = motionEnabled ? '3D vklopljen' : '3D izklopljen';
       }
       document.body.classList.toggle('motion-paused', !motionEnabled);
     }
@@ -372,7 +368,7 @@
     });
 
     if (countEl) {
-      var formatted = pad2(visibleCount);
+      var formatted = String(visibleCount);
       countEl.textContent = formatted;
       countEl.setAttribute('aria-label', 'Število prikazanih projektov: ' + formatted);
     }
@@ -410,13 +406,13 @@
 
     var existing = projectsById[id] || {};
     var cs = raw.caseStudy && typeof raw.caseStudy === 'object' ? raw.caseStudy : {};
-    var rawKicker = raw.kicker || raw.category || existing.kicker || 'PROJEKT';
+    var rawKicker = raw.kicker || raw.category || existing.kicker || 'Projekt';
     var hasHoverVideo = Object.prototype.hasOwnProperty.call(raw, 'hoverVideo');
 
     return {
       id: id,
       title: raw.title || raw.name || existing.title || id,
-      kicker: String(rawKicker).toUpperCase(),
+      kicker: String(rawKicker),
       domain: raw.domain || existing.domain || '',
       url: raw.url || raw.liveUrl || existing.url || '#',
       github: raw.github || raw.repo || raw.repoUrl || raw.githubUrl || existing.github || '',
@@ -449,7 +445,7 @@
     fallback.className = 'thumb-fallback';
     fallback.setAttribute('aria-hidden', 'true');
     var fallbackDomain = document.createElement('span');
-    fallbackDomain.textContent = (project.domain || project.title).toUpperCase();
+    fallbackDomain.textContent = project.domain || project.title;
     var fallbackSub = document.createElement('small');
     fallbackSub.textContent = project.kicker || 'Projekt';
     fallback.appendChild(fallbackDomain);
@@ -526,7 +522,7 @@
     actions.className = 'project-actions';
 
     var liveLink = document.createElement('a');
-    liveLink.className = 'btn btn-primary btn-sm';
+    liveLink.className = 'btn btn-secondary btn-sm';
     liveLink.href = project.url || '#';
     liveLink.target = '_blank';
     liveLink.rel = 'noopener noreferrer';
@@ -705,7 +701,7 @@
 
       if (kickerEl) kickerEl.textContent = project.kicker + (project.domain ? ' · ' + project.domain : '');
       if (titleEl) titleEl.textContent = project.title;
-      if (domainFallbackEl) domainFallbackEl.textContent = (project.domain || project.title).toUpperCase();
+      if (domainFallbackEl) domainFallbackEl.textContent = project.domain || project.title;
 
       if (webpEl) {
         if (project.imageWebp) {
