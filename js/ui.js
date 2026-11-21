@@ -22,7 +22,7 @@
       github: 'https://github.com/Voixy25/VinaSkomina',
       image: 'media/vina.jpg',
       imageWebp: 'media/vina.webp',
-      imageAlt: 'Predogled spletne strani Vina Skomina — degustacije vin v Vipavski dolini',
+      imageAlt: 'Predogled spletne strani Vina Skomina: degustacije vin v Vipavski dolini',
       tags: ['Splet', 'Optimizacija', 'Interaktivna grafika'],
       tech: ['HTML5 / CSS3', 'Vanilla JS', 'Leaflet', 'SVG animacije', 'SL / EN / IT', 'Schema.org'],
       challenge: 'Družinska vinska klet je potrebovala pregledno trojezično predstavitev vin in degustacij s prikazom vinogradov ter enostavnim povpraševanjem brez zapletenih rezervacijskih sistemov ali počasnih večstranskih predlog.',
@@ -44,7 +44,7 @@
       github: 'https://github.com/Voixy25/Dimet',
       image: 'media/dimet.jpg',
       imageWebp: 'media/dimet.webp',
-      imageAlt: 'Predogled spletnega kataloga Dimet — industrijska guma, cevi in pnevmatike',
+      imageAlt: 'Predogled spletnega kataloga Dimet: industrijska guma, cevi in pnevmatike',
       hoverVideo: 'media/dimet.mp4',
       tags: ['Splet', 'Optimizacija'],
       tech: ['Python SSG', 'Tailwind CSS', 'Vanilla JS', 'JSON', 'SEO & CLS'],
@@ -849,7 +849,7 @@
         onDone();
       } catch (e) {
         if (copyStatus) {
-          copyStatus.textContent = 'Kopiranje ni na voljo — pišite na ' + text;
+          copyStatus.textContent = 'Kopiranje ni na voljo. Pišite na ' + text;
         }
       }
       document.body.removeChild(temp);
@@ -1097,7 +1097,7 @@
           }
           form.reset();
           track('form_submit', { status: 'success', project_type: typeVal });
-          showSuccess('Hvala za povpraševanje! Sporočilo je bilo uspešno poslano — odgovorim v 1–2 delovnih dneh.');
+          showSuccess('Hvala za povpraševanje! Sporočilo je poslano, odgovorim v 1–2 delovnih dneh.');
         })
         .catch(function () {
           track('form_submit', { status: 'error', project_type: typeVal });

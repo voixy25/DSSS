@@ -22,7 +22,7 @@
     ],
     "imageWebp": "media/vina.webp",
     "imageFallback": "media/vina.jpg",
-    "imageAlt": "Predogled spletne strani Vina Skomina — degustacije vin v Vipavski dolini",
+    "imageAlt": "Predogled spletne strani Vina Skomina: degustacije vin v Vipavski dolini",
     "hoverVideo": null,
     "summary": "Predstavitvena in rezervacijska spletna stran družinske vinske kleti iz Vipavske doline z interaktivnim terroir zemljevidom, tremi jeziki in rezervacijo degustacij.",
     "caseStudy": {
@@ -52,7 +52,7 @@
     ],
     "imageWebp": "media/dimet.webp",
     "imageFallback": "media/dimet.jpg",
-    "imageAlt": "Predogled spletnega kataloga Dimet — industrijska guma, cevi in pnevmatike",
+    "imageAlt": "Predogled spletnega kataloga Dimet: industrijska guma, cevi in pnevmatike",
     "hoverVideo": "media/dimet.mp4",
     "summary": "Prenova in migracija B2B spletnega kataloga za industrijsko gumo in pnevmatike iz sistema WordPress/WooCommerce v hitro statično arhitekturo s 33 izdelki v 11 kategorijah.",
     "caseStudy": {
