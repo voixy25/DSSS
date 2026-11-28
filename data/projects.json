@@ -27,7 +27,7 @@
     "summary": "Predstavitvena in rezervacijska spletna stran družinske vinske kleti iz Vipavske doline z interaktivnim terroir zemljevidom, tremi jeziki in rezervacijo degustacij.",
     "caseStudy": {
       "challenge": "Družinska vinska klet je potrebovala pregledno trojezično predstavitev vin in degustacij s prikazom vinogradov ter enostavnim povpraševanjem brez zapletenih rezervacijskih sistemov ali počasnih večstranskih predlog.",
-      "solution": "Zgrajen je bil lahek statični splet brez zunanjih ogrodij: preklapljanje med slovenščino, angleščino in italijanščino s hreflang vstopnimi stranmi, animirana SVG trta ob drsenju, zakasnjen uvoz zemljevida Leaflet prek IntersectionObserverja in koledar za rezervacije z zanesljivim e-poštnim nadomestilom.",
+      "solution": "Zgrajen je bil lahek statični splet brez zunanjih ogrodij: preklapljanje med slovenščino, angleščino in italijanščino s hreflang vstopnimi stranmi, animirana SVG trta ob drsenju, zakasnjena inicializacija zemljevida Leaflet prek IntersectionObserverja in koledar za rezervacije z zanesljivim e-poštnim nadomestilom.",
       "result": "Enotna statična stran z WebP slikami, prednostnim nalaganjem hero fotografije in neposredno oddajo povpraševanj za degustacije ter nakup vina brez vzdrževanja zalednega strežnika."
     }
   },
@@ -52,13 +52,13 @@
     ],
     "imageWebp": "media/dimet.webp",
     "imageFallback": "media/dimet.jpg",
-    "imageAlt": "Predogled spletnega kataloga Dimet: industrijska guma, cevi in pnevmatike",
+    "imageAlt": "Predogled statične različice kataloga Dimet: industrijska guma, cevi in pnevmatike",
     "hoverVideo": "media/dimet.mp4",
-    "summary": "Prenova in migracija B2B spletnega kataloga za industrijsko gumo in pnevmatike iz sistema WordPress/WooCommerce v hitro statično arhitekturo s 33 izdelki v 11 kategorijah.",
+    "summary": "Statična različica B2B spletnega kataloga za industrijsko gumo in pnevmatike: 33 izdelkov v 11 kategorijah, prenesenih iz sistema WordPress/WooCommerce in objavljenih na dimet.skomina.si.",
     "caseStudy": {
-      "challenge": "Obstoječa trgovina na WordPressu in WooCommercu je prinašala odvisnost od vtičnikov, baze podatkov in vzdrževanja strežnika, čeprav podjetje dejansko potrebuje pregleden katalog izdelkov z neposrednim povpraševanjem.",
-      "solution": "Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS), ohranjanjem starih URL povezav ter takojšnjim iskanjem po katalogu v brskalniku.",
-      "result": "Katalog brez PHP-ja, baze podatkov ali zunanjih JS ogrodij, z enim minimiziranim CSS paketom, hitrim filtriranjem po kategorijah in delujočimi preusmeritvami iz predhodne trgovine."
+      "challenge": "Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.",
+      "solution": "Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS) in takojšnjim iskanjem po katalogu v brskalniku.",
+      "result": "Statična različica na dimet.skomina.si deluje brez PHP-ja, baze podatkov in zunanjih JS ogrodij, z enim minimiziranim CSS paketom in hitrim filtriranjem po kategorijah. Spletno mesto dimet.si še teče na WordPressu."
     }
   },
   {
@@ -79,7 +79,7 @@
       "GLSL Shaders",
       "2D Optics",
       "SL / EN",
-      "CSP"
+      "ES moduli"
     ],
     "imageWebp": "media/hub.webp",
     "imageFallback": "media/hub.jpg",
@@ -88,8 +88,8 @@
     "summary": "Minimalistično osebno vozlišče z interaktivno 3D WebGL2 stekleno prizmo in spektralnim lomom svetlobe v realnem času, zgrajeno brez zunanjih knjižnic.",
     "caseStudy": {
       "challenge": "Ustvariti prepoznavno osebno spletno vozlišče z realističnim lomom svetlobe skozi 3D prizmo, ki deluje gladko tudi na brskalnikih z različnimi grafičnimi omejitvami in brez težkih 3D paketov.",
-      "solution": "Izdelan je bil samostojen dvostopenjski grafični cevovod v čistih ES modulih: 2D spektralno sledenje žarkov čez 72 valovnih dolžin s Cauchyjevo disperzijo in WebGL2 senčilnik steklene prizme, opremljen s samodejnim preklopom na 2D platno, premorom animacije izven zaslona in dvojezičnim SL/EN vmesnikom.",
-      "result": "Odzivna 3D optična izkušnja brez zunanjih JS odvisnosti, ki podpira upravljanje s kazalcem ali sledilno ploščico ter vključuje stroge varnostne glave CSP za statično gostovanje."
+      "solution": "Dvostopenjski grafični cevovod v čistih ES modulih, večinoma prenesen iz odprtokodnega vercel-labs/vgpu (MIT):2D spektralno sledenje žarkov čez 72 valovnih dolžin s Cauchyjevo disperzijo in WebGL2 senčilnik steklene prizme, opremljen s samodejnim preklopom na 2D platno, premorom animacije izven zaslona in dvojezičnim SL/EN vmesnikom.",
+      "result": "Odzivna 3D optična izkušnja brez zunanjih JS odvisnosti, ki podpira upravljanje s kazalcem ali sledilno ploščico."
     }
   }
 ]

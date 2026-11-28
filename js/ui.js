@@ -26,11 +26,11 @@
       tags: ['Splet', 'Optimizacija', 'Interaktivna grafika'],
       tech: ['HTML5 / CSS3', 'Vanilla JS', 'Leaflet', 'SVG animacije', 'SL / EN / IT', 'Schema.org'],
       challenge: 'Družinska vinska klet je potrebovala pregledno trojezično predstavitev vin in degustacij s prikazom vinogradov ter enostavnim povpraševanjem brez zapletenih rezervacijskih sistemov ali počasnih večstranskih predlog.',
-      solution: 'Zgrajen je bil lahek statični splet brez zunanjih ogrodij: preklapljanje med slovenščino, angleščino in italijanščino s hreflang vstopnimi stranmi, animirana SVG trta ob drsenju, zakasnjen uvoz zemljevida Leaflet prek IntersectionObserverja in koledar za rezervacije z zanesljivim e-poštnim nadomestilom.',
+      solution: 'Zgrajen je bil lahek statični splet brez zunanjih ogrodij: preklapljanje med slovenščino, angleščino in italijanščino s hreflang vstopnimi stranmi, animirana SVG trta ob drsenju, zakasnjena inicializacija zemljevida Leaflet prek IntersectionObserverja in koledar za rezervacije z zanesljivim e-poštnim nadomestilom.',
       result: 'Enotna statična stran z WebP slikami, prednostnim nalaganjem hero fotografije in neposredno oddajo povpraševanj za degustacije ter nakup vina brez vzdrževanja zalednega strežnika.',
       deliverables: [
         'Trojezična izvedba (SL / EN / IT) s hreflang vstopnimi stranmi',
-        'Animirana SVG trta ob drsenju in zakasnjen uvoz zemljevida Leaflet',
+        'Animirana SVG trta ob drsenju in zakasnjena inicializacija zemljevida Leaflet',
         'Koledar ter obrazec za povpraševanja glede degustacij z e-poštnim nadomestilom',
         'Optimizirane WebP fotografije in prednostno nalaganje hero slike'
       ]
@@ -44,18 +44,18 @@
       github: 'https://github.com/Voixy25/Dimet',
       image: 'media/dimet.jpg',
       imageWebp: 'media/dimet.webp',
-      imageAlt: 'Predogled spletnega kataloga Dimet: industrijska guma, cevi in pnevmatike',
+      imageAlt: 'Predogled statične različice kataloga Dimet: industrijska guma, cevi in pnevmatike',
       hoverVideo: 'media/dimet.mp4',
       tags: ['Splet', 'Optimizacija'],
       tech: ['Python SSG', 'Tailwind CSS', 'Vanilla JS', 'JSON', 'SEO & CLS'],
-      challenge: 'Obstoječa trgovina na WordPressu in WooCommercu je prinašala odvisnost od vtičnikov, baze podatkov in vzdrževanja strežnika, čeprav podjetje dejansko potrebuje pregleden katalog izdelkov z neposrednim povpraševanjem.',
-      solution: 'Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS), ohranjanjem starih URL povezav ter takojšnjim iskanjem po katalogu v brskalniku.',
-      result: 'Katalog brez PHP-ja, baze podatkov ali zunanjih JS ogrodij, z enim minimiziranim CSS paketom, hitrim filtriranjem po kategorijah in delujočimi preusmeritvami iz predhodne trgovine.',
+      challenge: 'Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.',
+      solution: 'Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS) in takojšnjim iskanjem po katalogu v brskalniku.',
+      result: 'Statična različica na dimet.skomina.si deluje brez PHP-ja, baze podatkov in zunanjih JS ogrodij, z enim minimiziranim CSS paketom in hitrim filtriranjem po kategorijah. Spletno mesto dimet.si še teče na WordPressu.',
       deliverables: [
-        'Migracija 11 kategorij, 33 izdelkov in novic iz WordPressa v strukturiran JSON',
+        'Prenos 11 kategorij, 33 izdelkov in novic iz WordPressa v strukturiran JSON',
         'Python SSG gradilni skript in en minimiziran Tailwind CSS paket',
         'Takojšnje iskanje in filtriranje po katalogu v brskalniku',
-        'Ohranjene stare URL povezave s preusmeritvami in premerjene dimenzije slik (CLS = 0)'
+        'Premerjene dimenzije slik proti zamikom postavitve (CLS)'
       ]
     },
     'skomina-hub': {
@@ -69,15 +69,15 @@
       imageWebp: 'media/hub.webp',
       imageAlt: 'Predogled spletnega središča skomina.si z interaktivno 3D stekleno prizmo in lomom svetlobe',
       tags: ['Splet', 'Optimizacija', 'Interaktivna grafika'],
-      tech: ['WebGL2', 'GLSL Shaders', '2D Optics', 'SL / EN', 'CSP'],
+      tech: ['WebGL2', 'GLSL Shaders', '2D Optics', 'SL / EN', 'ES moduli'],
       challenge: 'Ustvariti prepoznavno osebno spletno vozlišče z realističnim lomom svetlobe skozi 3D prizmo, ki deluje gladko tudi na brskalnikih z različnimi grafičnimi omejitvami in brez težkih 3D paketov.',
-      solution: 'Izdelan je bil samostojen dvostopenjski grafični cevovod v čistih ES modulih: 2D spektralno sledenje žarkov čez 72 valovnih dolžin s Cauchyjevo disperzijo in WebGL2 senčilnik steklene prizme, opremljen s samodejnim preklopom na 2D platno, premorom animacije izven zaslona in dvojezičnim SL/EN vmesnikom.',
-      result: 'Odzivna 3D optična izkušnja brez zunanjih JS odvisnosti, ki podpira upravljanje s kazalcem ali sledilno ploščico ter vključuje stroge varnostne glave CSP za statično gostovanje.',
+      solution: 'Dvostopenjski grafični cevovod v čistih ES modulih, večinoma prenesen iz odprtokodnega vercel-labs/vgpu (MIT):2D spektralno sledenje žarkov čez 72 valovnih dolžin s Cauchyjevo disperzijo in WebGL2 senčilnik steklene prizme, opremljen s samodejnim preklopom na 2D platno, premorom animacije izven zaslona in dvojezičnim SL/EN vmesnikom.',
+      result: 'Odzivna 3D optična izkušnja brez zunanjih JS odvisnosti, ki podpira upravljanje s kazalcem ali sledilno ploščico.',
       deliverables: [
         'Dvostopenjski WebGL2 / GLSL in Canvas 2D cevovod brez zunanjih JS knjižnic',
         '2D spektralno sledenje žarkov čez 72 valovnih dolžin s Cauchyjevo disperzijo',
         'Samodejni preklop na 2D platno in premor animacije izven zaslona',
-        'Dvojezični SL/EN vmesnik in stroge varnostne glave CSP za statično gostovanje'
+        'Dvojezični SL/EN vmesnik'
       ]
     }
   };
@@ -575,7 +575,7 @@
   function loadProjectsJson() {
     if (typeof window.fetch !== 'function') return;
 
-    fetch('data/projects.json?v=20261120', { headers: { Accept: 'application/json' } })
+    fetch('data/projects.json?v=20261128', { headers: { Accept: 'application/json' } })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
