@@ -1,8 +1,8 @@
 /*
  * DSSS — interactive UI controller.
  * Handles mobile drawer, 3D motion toggle, project filtering & JSON sync,
- * desktop-only hover video for Dimet, case-study & privacy dialogs,
- * service pre-fill, email copy, and AJAX contact form with anti-spam.
+ * case-study & privacy dialogs, service pre-fill, email copy,
+ * and AJAX contact form with anti-spam.
  */
 (function () {
   'use strict';
@@ -33,29 +33,6 @@
         'Animirana SVG trta ob drsenju in zakasnjena inicializacija zemljevida Leaflet',
         'Koledar ter obrazec za povpraševanja glede degustacij z e-poštnim nadomestilom',
         'Optimizirane WebP fotografije in prednostno nalaganje hero slike'
-      ]
-    },
-    'dimet': {
-      id: 'dimet',
-      title: 'Dimet d.o.o.',
-      kicker: 'STORITVE & KATALOG',
-      domain: 'dimet.skomina.si',
-      url: 'https://dimet.skomina.si',
-      github: 'https://github.com/Voixy25/Dimet',
-      image: 'media/dimet.jpg',
-      imageWebp: 'media/dimet.webp',
-      imageAlt: 'Predogled statične različice kataloga Dimet: industrijska guma, cevi in pnevmatike',
-      hoverVideo: 'media/dimet.mp4',
-      tags: ['Splet', 'Optimizacija'],
-      tech: ['Python SSG', 'Tailwind CSS', 'Vanilla JS', 'JSON', 'SEO & CLS'],
-      challenge: 'Lasten projekt v prostem času. Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.',
-      solution: 'Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS) in takojšnjim iskanjem po katalogu v brskalniku.',
-      result: 'Statična različica na dimet.skomina.si deluje brez PHP-ja, baze podatkov in zunanjih JS ogrodij, z enim minimiziranim CSS paketom in hitrim filtriranjem po kategorijah. Spletno mesto dimet.si še teče na WordPressu.',
-      deliverables: [
-        'Prenos 11 kategorij, 33 izdelkov in novic iz WordPressa v strukturiran JSON',
-        'Python SSG gradilni skript in en minimiziran Tailwind CSS paket',
-        'Takojšnje iskanje in filtriranje po katalogu v brskalniku',
-        'Premerjene dimenzije slik proti zamikom postavitve (CLS)'
       ]
     },
     'skomina-hub': {
@@ -245,99 +222,6 @@
   }
 
   /* ------------------------------------------------------------------
-   * Desktop-Only Hover Video (Dimet only)
-   * ------------------------------------------------------------------ */
-  var hoverEnvListenersBound = false;
-
-  function initHoverVideos() {
-    var hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)');
-    var reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var thumbs = Array.prototype.slice.call(document.querySelectorAll('.project-thumb[data-hover-video]'));
-
-    function canPlayHoverVideo() {
-      return hoverQuery.matches && !reducedQuery.matches;
-    }
-
-    function teardownVideo(thumb) {
-      thumb.dataset.isHovered = '0';
-      var video = thumb.querySelector('video');
-      if (video) {
-        video.pause();
-        video.classList.remove('is-ready');
-      }
-    }
-
-    function teardownAll() {
-      Array.prototype.slice.call(document.querySelectorAll('.project-thumb[data-hover-video]')).forEach(function (thumb) {
-        thumb.dataset.isHovered = '0';
-        var video = thumb.querySelector('video');
-        if (video && video.parentNode) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-          video.parentNode.removeChild(video);
-        }
-      });
-    }
-
-    thumbs.forEach(function (thumb) {
-      if (thumb.dataset.hoverBound === '1') return;
-      thumb.dataset.hoverBound = '1';
-
-      thumb.addEventListener('mouseenter', function () {
-        thumb.dataset.isHovered = '1';
-        if (!canPlayHoverVideo()) return;
-        var src = thumb.getAttribute('data-hover-video');
-        if (!src) return;
-
-        var video = thumb.querySelector('video');
-        if (!video) {
-          video = document.createElement('video');
-          video.muted = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.preload = 'metadata';
-          video.setAttribute('aria-hidden', 'true');
-          video.src = src;
-          video.addEventListener('canplay', function () {
-            if (thumb.dataset.isHovered === '1' && canPlayHoverVideo() && !video.paused) {
-              video.classList.add('is-ready');
-            }
-          });
-          thumb.appendChild(video);
-        }
-
-        var playPromise = video.play();
-        if (playPromise && typeof playPromise.then === 'function') {
-          playPromise.then(function () {
-            if (thumb.dataset.isHovered === '1' && video.readyState >= 2) {
-              video.classList.add('is-ready');
-            }
-          }).catch(function () {});
-        } else if (video.readyState >= 2) {
-          video.classList.add('is-ready');
-        }
-      });
-
-      thumb.addEventListener('mouseleave', function () {
-        teardownVideo(thumb);
-      });
-    });
-
-    if (!hoverEnvListenersBound) {
-      hoverEnvListenersBound = true;
-      var onEnvChange = function () {
-        if (!canPlayHoverVideo()) teardownAll();
-      };
-      if (hoverQuery.addEventListener) hoverQuery.addEventListener('change', onEnvChange);
-      else if (hoverQuery.addListener) hoverQuery.addListener(onEnvChange);
-
-      if (reducedQuery.addEventListener) reducedQuery.addEventListener('change', onEnvChange);
-      else if (reducedQuery.addListener) reducedQuery.addListener(onEnvChange);
-    }
-  }
-
-  /* ------------------------------------------------------------------
    * Projects: Filtering, Counter, Dynamic JSON Sync & Safe Rendering
    * ------------------------------------------------------------------ */
   var activeFilter = 'all';
@@ -407,7 +291,6 @@
     var existing = projectsById[id] || {};
     var cs = raw.caseStudy && typeof raw.caseStudy === 'object' ? raw.caseStudy : {};
     var rawKicker = raw.kicker || raw.category || existing.kicker || 'Projekt';
-    var hasHoverVideo = Object.prototype.hasOwnProperty.call(raw, 'hoverVideo');
 
     return {
       id: id,
@@ -419,7 +302,6 @@
       image: raw.image || raw.imageFallback || raw.poster || existing.image || '',
       imageWebp: raw.imageWebp || raw.webp || existing.imageWebp || '',
       imageAlt: raw.imageAlt || raw.alt || existing.imageAlt || ('Predogled projekta ' + (raw.title || existing.title || id)),
-      hoverVideo: hasHoverVideo ? (raw.hoverVideo || '') : (existing.hoverVideo || ''),
       tags: Array.isArray(raw.tags) ? raw.tags : (Array.isArray(raw.categories) ? raw.categories : (existing.tags || ['Splet'])),
       tech: Array.isArray(raw.tech) ? raw.tech : (Array.isArray(raw.stack) ? raw.stack : (existing.tech || [])),
       challenge: cs.challenge || raw.challenge || raw.izziv || existing.challenge || '',
@@ -437,9 +319,6 @@
 
     var thumb = document.createElement('div');
     thumb.className = 'project-thumb';
-    if (project.hoverVideo) {
-      thumb.setAttribute('data-hover-video', project.hoverVideo);
-    }
 
     var fallback = document.createElement('div');
     fallback.className = 'thumb-fallback';
@@ -575,7 +454,7 @@
   function loadProjectsJson() {
     if (typeof window.fetch !== 'function') return;
 
-    fetch('data/projects.json?v=20261128', { headers: { Accept: 'application/json' } })
+    fetch('data/projects.json?v=20261128b', { headers: { Accept: 'application/json' } })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
@@ -587,7 +466,6 @@
         if (!list.length) return;
 
         var grid = document.getElementById('projects-grid');
-        var appended = false;
 
         list.forEach(function (raw) {
           var normalized = normalizeProject(raw);
@@ -600,13 +478,9 @@
             syncExistingCardMedia(existingCard, normalized);
           } else {
             grid.appendChild(createProjectCardElement(normalized));
-            appended = true;
           }
         });
 
-        if (appended) {
-          initHoverVideos();
-        }
         applyProjectFilter(activeFilter);
       })
       .catch(function () {
@@ -1123,7 +997,6 @@
     initMobileNav();
     initMotionToggle();
     initProjectFilters();
-    initHoverVideos();
     initModals();
     initInteractions();
     initTurnstileIfConfigured();

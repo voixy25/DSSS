@@ -670,29 +670,6 @@ html.no-webgl .motion-toggle {
   border-color: var(--line-strong);
 }
 
-@media (min-width: 1025px) {
-  .project-card:first-child {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  }
-
-  .project-card:first-child .project-thumb {
-    aspect-ratio: auto;
-    min-height: 100%;
-    border-bottom: 0;
-    border-right: 1px solid var(--line);
-  }
-
-  .project-card:first-child .project-body {
-    padding: 32px;
-  }
-
-  .project-card:first-child .project-title {
-    font-size: 28px;
-  }
-}
-
 .project-thumb {
   position: relative;
   aspect-ratio: 16 / 10;
@@ -702,8 +679,7 @@ html.no-webgl .motion-toggle {
 }
 
 .project-thumb picture,
-.project-thumb img,
-.project-thumb video {
+.project-thumb img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -719,17 +695,6 @@ html.no-webgl .motion-toggle {
 
 .project-thumb img.is-fallback {
   display: none;
-}
-
-.project-thumb video {
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-enter) var(--ease);
-}
-
-.project-thumb video.is-ready {
-  opacity: 1;
 }
 
 .thumb-fallback {

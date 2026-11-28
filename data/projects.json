@@ -23,42 +23,11 @@
     "imageWebp": "media/vina.webp",
     "imageFallback": "media/vina.jpg",
     "imageAlt": "Predogled spletne strani Vina Skomina: degustacije vin v Vipavski dolini",
-    "hoverVideo": null,
     "summary": "Predstavitvena in rezervacijska spletna stran družinske vinske kleti iz Vipavske doline z interaktivnim terroir zemljevidom, tremi jeziki in rezervacijo degustacij.",
     "caseStudy": {
       "challenge": "Družinska vinska klet je potrebovala pregledno trojezično predstavitev vin in degustacij s prikazom vinogradov ter enostavnim povpraševanjem brez zapletenih rezervacijskih sistemov ali počasnih večstranskih predlog.",
       "solution": "Zgrajen je bil lahek statični splet brez zunanjih ogrodij: preklapljanje med slovenščino, angleščino in italijanščino s hreflang vstopnimi stranmi, animirana SVG trta ob drsenju, zakasnjena inicializacija zemljevida Leaflet prek IntersectionObserverja in koledar za rezervacije z zanesljivim e-poštnim nadomestilom.",
       "result": "Enotna statična stran z WebP slikami, prednostnim nalaganjem hero fotografije in neposredno oddajo povpraševanj za degustacije ter nakup vina brez vzdrževanja zalednega strežnika."
-    }
-  },
-  {
-    "id": "dimet",
-    "title": "Dimet d.o.o.",
-    "category": "Storitve & katalog",
-    "domain": "dimet.skomina.si",
-    "url": "https://dimet.skomina.si",
-    "repoUrl": "https://github.com/Voixy25/Dimet",
-    "year": "2026",
-    "tags": [
-      "Splet",
-      "Optimizacija"
-    ],
-    "tech": [
-      "Python SSG",
-      "Tailwind CSS",
-      "Vanilla JS",
-      "JSON",
-      "SEO & CLS"
-    ],
-    "imageWebp": "media/dimet.webp",
-    "imageFallback": "media/dimet.jpg",
-    "imageAlt": "Predogled statične različice kataloga Dimet: industrijska guma, cevi in pnevmatike",
-    "hoverVideo": "media/dimet.mp4",
-    "summary": "Lasten projekt v prostem času: migracija B2B kataloga za industrijsko gumo in pnevmatike iz sistema WordPress/WooCommerce na HTML, CSS in JavaScript. 33 izdelkov v 11 kategorijah, objavljeno na dimet.skomina.si.",
-    "caseStudy": {
-      "challenge": "Lasten projekt v prostem času. Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.",
-      "solution": "Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS) in takojšnjim iskanjem po katalogu v brskalniku.",
-      "result": "Statična različica na dimet.skomina.si deluje brez PHP-ja, baze podatkov in zunanjih JS ogrodij, z enim minimiziranim CSS paketom in hitrim filtriranjem po kategorijah. Spletno mesto dimet.si še teče na WordPressu."
     }
   },
   {
@@ -84,7 +53,6 @@
     "imageWebp": "media/hub.webp",
     "imageFallback": "media/hub.jpg",
     "imageAlt": "Predogled spletnega središča skomina.si z interaktivno 3D stekleno prizmo in lomom svetlobe",
-    "hoverVideo": null,
     "summary": "Minimalistično osebno vozlišče z interaktivno 3D WebGL2 stekleno prizmo in spektralnim lomom svetlobe v realnem času, zgrajeno brez zunanjih knjižnic.",
     "caseStudy": {
       "challenge": "Ustvariti prepoznavno osebno spletno vozlišče z realističnim lomom svetlobe skozi 3D prizmo, ki deluje gladko tudi na brskalnikih z različnimi grafičnimi omejitvami in brez težkih 3D paketov.",

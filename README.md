@@ -26,7 +26,7 @@ Then open http://localhost:8000. Use a server rather than opening the file direc
 - `js/ui.js` - navigation, project filters, dialogs, contact form
 - `js/analytics.js` - in-memory event counters, no cookies
 - `data/projects.json` - project data
-- `media/` - images, video and fonts
+- `media/` - images and fonts
 - `404.html`, `robots.txt`, `sitemap.xml`, `CNAME`
 
 ## Editing
