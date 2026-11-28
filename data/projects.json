@@ -54,9 +54,9 @@
     "imageFallback": "media/dimet.jpg",
     "imageAlt": "Predogled statične različice kataloga Dimet: industrijska guma, cevi in pnevmatike",
     "hoverVideo": "media/dimet.mp4",
-    "summary": "Statična različica B2B spletnega kataloga za industrijsko gumo in pnevmatike: 33 izdelkov v 11 kategorijah, prenesenih iz sistema WordPress/WooCommerce in objavljenih na dimet.skomina.si.",
+    "summary": "Lasten projekt v prostem času: migracija B2B kataloga za industrijsko gumo in pnevmatike iz sistema WordPress/WooCommerce na HTML, CSS in JavaScript. 33 izdelkov v 11 kategorijah, objavljeno na dimet.skomina.si.",
     "caseStudy": {
-      "challenge": "Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.",
+      "challenge": "Lasten projekt v prostem času. Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.",
       "solution": "Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS) in takojšnjim iskanjem po katalogu v brskalniku.",
       "result": "Statična različica na dimet.skomina.si deluje brez PHP-ja, baze podatkov in zunanjih JS ogrodij, z enim minimiziranim CSS paketom in hitrim filtriranjem po kategorijah. Spletno mesto dimet.si še teče na WordPressu."
     }

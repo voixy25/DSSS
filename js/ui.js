@@ -48,7 +48,7 @@
       hoverVideo: 'media/dimet.mp4',
       tags: ['Splet', 'Optimizacija'],
       tech: ['Python SSG', 'Tailwind CSS', 'Vanilla JS', 'JSON', 'SEO & CLS'],
-      challenge: 'Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.',
+      challenge: 'Lasten projekt v prostem času. Trgovina dimet.si na WordPressu in WooCommercu je odvisna od vtičnikov, baze podatkov in vzdrževanja strežnika. Cilj statične različice je pregleden katalog izdelkov z neposrednim povpraševanjem brez teh odvisnosti.',
       solution: 'Vsebina 11 kategorij, 33 izdelkov in novic je bila prenesena v strukturiran JSON vir, iz katerega Python generator in Tailwind CSS sestavijo popolnoma statične strani s premerjenimi dimenzijami slik proti zamikom postavitve (CLS) in takojšnjim iskanjem po katalogu v brskalniku.',
       result: 'Statična različica na dimet.skomina.si deluje brez PHP-ja, baze podatkov in zunanjih JS ogrodij, z enim minimiziranim CSS paketom in hitrim filtriranjem po kategorijah. Spletno mesto dimet.si še teče na WordPressu.',
       deliverables: [
